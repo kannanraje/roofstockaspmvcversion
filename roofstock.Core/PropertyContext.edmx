@@ -1,0 +1,249 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TestModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="Idx" />
+          </Key>
+          <Property Name="Idx" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Address1" Type="varchar" MaxLength="255" />
+          <Property Name="Address2" Type="varchar" MaxLength="255" />
+          <Property Name="City" Type="varchar" MaxLength="25" />
+          <Property Name="Country" Type="varchar" MaxLength="25" />
+          <Property Name="County" Type="varchar" MaxLength="25" />
+          <Property Name="District" Type="varchar" MaxLength="50" />
+          <Property Name="State" Type="varchar" MaxLength="25" />
+          <Property Name="Zip" Type="varchar" MaxLength="10" />
+          <Property Name="ZipPlus4" Type="varchar" MaxLength="25" />
+          <Property Name="PropertyId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Photos">
+          <Key>
+            <PropertyRef Name="PhotoId" />
+          </Key>
+          <Property Name="PhotoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ResourceType" Type="varchar" MaxLength="50" />
+          <Property Name="FileName" Type="varchar" MaxLength="50" />
+          <Property Name="ContentType" Type="varchar" MaxLength="50" />
+          <Property Name="Url" Type="nvarchar" MaxLength="500" />
+          <Property Name="UrlMedium" Type="nvarchar" MaxLength="500" />
+          <Property Name="UrlSmall" Type="nvarchar" MaxLength="500" />
+          <Property Name="Description" Type="varchar" MaxLength="250" />
+          <Property Name="PropertyId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Properties">
+          <Key>
+            <PropertyRef Name="PropertyId" />
+          </Key>
+          <Property Name="PropertyId" Type="bigint" Nullable="false" />
+          <Property Name="AccountId" Type="bigint" Nullable="false" />
+          <Property Name="MainImageUrl" Type="nvarchar" MaxLength="500" />
+          <Property Name="Yearbuilt" Type="int" />
+          <Property Name="ListPrice" Type="decimal" Precision="12" Scale="4" />
+          <Property Name="MonthlyRent" Type="decimal" Precision="12" Scale="4" />
+          <Property Name="GrossYield" Type="decimal" Precision="12" Scale="4" />
+        </EntityType>
+        <Association Name="FK__Address__Propert__4222D4EF">
+          <End Role="Properties" Type="Self.Properties" Multiplicity="1" />
+          <End Role="Address" Type="Self.Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Properties">
+              <PropertyRef Name="PropertyId" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="PropertyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Photos__Property__44FF419A">
+          <End Role="Properties" Type="Self.Properties" Multiplicity="1" />
+          <End Role="Photos" Type="Self.Photos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Properties">
+              <PropertyRef Name="PropertyId" />
+            </Principal>
+            <Dependent Role="Photos">
+              <PropertyRef Name="PropertyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TestModelStoreContainer">
+          <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Photos" EntityType="Self.Photos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Properties" EntityType="Self.Properties" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Address__Propert__4222D4EF" Association="Self.FK__Address__Propert__4222D4EF">
+            <End Role="Properties" EntitySet="Properties" />
+            <End Role="Address" EntitySet="Address" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Photos__Property__44FF419A" Association="Self.FK__Photos__Property__44FF419A">
+            <End Role="Properties" EntitySet="Properties" />
+            <End Role="Photos" EntitySet="Photos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="Idx" />
+          </Key>
+          <Property Name="Idx" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Address1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Address2" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="County" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="District" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Zip" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ZipPlus4" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="PropertyId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Property" Relationship="Self.FK__Address__Propert__4222D4EF" FromRole="Address" ToRole="Properties" />
+        </EntityType>
+        <EntityType Name="Photo">
+          <Key>
+            <PropertyRef Name="PhotoId" />
+          </Key>
+          <Property Name="PhotoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ResourceType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FileName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ContentType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Url" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="UrlMedium" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="UrlSmall" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="PropertyId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Property" Relationship="Self.FK__Photos__Property__44FF419A" FromRole="Photos" ToRole="Properties" />
+        </EntityType>
+        <EntityType Name="Property">
+          <Key>
+            <PropertyRef Name="PropertyId" />
+          </Key>
+          <Property Name="PropertyId" Type="Int64" Nullable="false" />
+          <Property Name="AccountId" Type="Int64" Nullable="false" />
+          <Property Name="MainImageUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Yearbuilt" Type="Int32" />
+          <Property Name="ListPrice" Type="Decimal" Precision="12" Scale="4" />
+          <Property Name="MonthlyRent" Type="Decimal" Precision="12" Scale="4" />
+          <Property Name="GrossYield" Type="Decimal" Precision="12" Scale="4" />
+          <NavigationProperty Name="Addresses" Relationship="Self.FK__Address__Propert__4222D4EF" FromRole="Properties" ToRole="Address" />
+          <NavigationProperty Name="Photos" Relationship="Self.FK__Photos__Property__44FF419A" FromRole="Properties" ToRole="Photos" />
+        </EntityType>
+        <Association Name="FK__Address__Propert__4222D4EF">
+          <End Role="Properties" Type="Self.Property" Multiplicity="1" />
+          <End Role="Address" Type="Self.Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Properties">
+              <PropertyRef Name="PropertyId" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="PropertyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Photos__Property__44FF419A">
+          <End Role="Properties" Type="Self.Property" Multiplicity="1" />
+          <End Role="Photos" Type="Self.Photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Properties">
+              <PropertyRef Name="PropertyId" />
+            </Principal>
+            <Dependent Role="Photos">
+              <PropertyRef Name="PropertyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PropertyEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Addresses" EntityType="Self.Address" />
+          <EntitySet Name="Photos" EntityType="Self.Photo" />
+          <EntitySet Name="Properties" EntityType="Self.Property" />
+          <AssociationSet Name="FK__Address__Propert__4222D4EF" Association="Self.FK__Address__Propert__4222D4EF">
+            <End Role="Properties" EntitySet="Properties" />
+            <End Role="Address" EntitySet="Addresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Photos__Property__44FF419A" Association="Self.FK__Photos__Property__44FF419A">
+            <End Role="Properties" EntitySet="Properties" />
+            <End Role="Photos" EntitySet="Photos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TestModelStoreContainer" CdmEntityContainer="PropertyEntities">
+          <EntitySetMapping Name="Addresses">
+            <EntityTypeMapping TypeName="TestModel.Address">
+              <MappingFragment StoreEntitySet="Address">
+                <ScalarProperty Name="Idx" ColumnName="Idx" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="County" ColumnName="County" />
+                <ScalarProperty Name="District" ColumnName="District" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="ZipPlus4" ColumnName="ZipPlus4" />
+                <ScalarProperty Name="PropertyId" ColumnName="PropertyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Photos">
+            <EntityTypeMapping TypeName="TestModel.Photo">
+              <MappingFragment StoreEntitySet="Photos">
+                <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
+                <ScalarProperty Name="ResourceType" ColumnName="ResourceType" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="ContentType" ColumnName="ContentType" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="UrlMedium" ColumnName="UrlMedium" />
+                <ScalarProperty Name="UrlSmall" ColumnName="UrlSmall" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PropertyId" ColumnName="PropertyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Properties">
+            <EntityTypeMapping TypeName="TestModel.Property">
+              <MappingFragment StoreEntitySet="Properties">
+                <ScalarProperty Name="PropertyId" ColumnName="PropertyId" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="MainImageUrl" ColumnName="MainImageUrl" />
+                <ScalarProperty Name="Yearbuilt" ColumnName="Yearbuilt" />
+                <ScalarProperty Name="ListPrice" ColumnName="ListPrice" />
+                <ScalarProperty Name="MonthlyRent" ColumnName="MonthlyRent" />
+                <ScalarProperty Name="GrossYield" ColumnName="GrossYield" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

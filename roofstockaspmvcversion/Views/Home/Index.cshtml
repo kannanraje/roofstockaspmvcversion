@@ -1,0 +1,71 @@
+﻿@model IEnumerable<roofstock.Core.ViewModels.PropertyViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="container py-5">
+
+   
+
+    <div>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <div className="container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="tableheaderbig"></th>
+                                <th class="tableheaderbig">Address</th>
+                                <th class="tableheadermedium">List Price</th>
+                                <th class="tableheadermedium">Monthly Rent</th>
+                                <th class="tableheadermedium">Gross Yield</th>
+                                <th class="tableheadermedium">Year Built</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <a href="@Url.Action("Details", "Home", item)">
+                                            <img src=@item.MainImageUrl
+                                                 class="tablerowimage" />
+                                        </a>
+                                    </td>
+                                    <td> @item.Address</td>
+                                    <td> @item.ListPrice</td>
+                                    <td> @item.MonthlyRent</td>
+                                    <td>@item.GrossYield</td>
+                                    <td>@item.Yearbuilt</td>
+                                    <td>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<style>
+
+    .tableheaderbig {
+        width: 200px;
+        height: 50px;
+    }
+
+    .tableheadermedium {
+        width: 150px;
+        height: 50px;
+    }
+
+    .tablerowimage {
+        width: 200px;
+        height: 100px;
+        object-fit: cover;
+        padding: 20px;
+    }
+</style>

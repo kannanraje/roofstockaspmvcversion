@@ -1,0 +1,77 @@
+﻿@model roofstock.Core.ViewModels.PropertyViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<input type="button" value="Back" class="btn btn-primary btn-arrow-left" onclick="location.href='@Url.Action("Index", "Home")'" />
+<div class="card-group" style="display: flex;flex-wrap: wrap;justify-content:space-between;margin-top:20px">
+
+    <div class="card cardview">
+        <div class="card-body cardbodyview">
+            <img class="card-img-top cardimageview" src=@Model.MainImageUrl alt="image" />
+
+            <div class="container">
+
+                <div class="row" style="padding:5px">
+                    <div class="col-lg-1">
+                        <div class="row"> ListPrice</div>
+                        <div class="row"> @Model.ListPrice</div>
+                    </div>
+                    <div class="col-lg-1">
+                        <div class="row">Monthly Rent</div>
+                        <div class="row"> @Model.ListPrice</div>
+                    </div>
+                </div>
+                <div class="row" style="text-align:center">
+                    <div class="col-lg-1">
+                        <div class="row">GrossYield</div>
+                        <div class="row">@Model.GrossYield</div>
+                    </div>
+                    <div class="col-lg-1">
+                        <div class="row">Year Built</div>
+                        <div class="row"> @Model.Yearbuilt </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top:20px">
+                    <div> @Model.Address </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<style>
+    .address {
+        padding: 5px;
+        text-align: center;
+    }
+
+
+    .carddeckview {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .cardimageview {
+        width: 100%;
+        height: 15vw;
+        object-fit: cover;
+    }
+
+    .cardview {
+        width: 30rem;
+    }
+
+    .cardbodyview {
+        line-height: 1.375rem;
+    }
+
+    .cardviewAddress {
+        padding: 5px;
+        text-align: center;
+    }
+
+</style>
